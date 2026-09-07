@@ -5,18 +5,21 @@ import json
 import pandas as pd
 import os
 from io import BytesIO
-from fpdf import FPDF
+# from fpdf import FPDF
 
 
 from datetime import datetime
 import matplotlib
 matplotlib.use("Agg")  # Use a non-interactive backend
 
-import glob
+
 import time
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app = Flask(__name__)
-app.secret_key = "your_secret_key"
+app.secret_key = os.environ.get("SECRET_KEY", "dev-fallback-key")
 
 
 @app.after_request
@@ -127,11 +130,11 @@ def about():
 
 
 
-import glob
+
 import plotly.graph_objects as go
 
 
-import uuid
+
 import matplotlib.pyplot as plt
 
 # Function to clean up old graph files based on the age limit in seconds
